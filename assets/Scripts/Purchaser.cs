@@ -10,11 +10,8 @@ using UnityEngine.Purchasing;
 		private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
 		GUIEventFunctions guiEventFunctions; // A class within uiFunctions to access its functions
-		
-		//public static string kProductIDConsumable =    "consumable";   
+	  
 		public static string removeAdsPurchaseID = "noads";
-		//public static string kProductIDSubscription =  "subscription"; 
-
 
 		void Awake ()
 		{
