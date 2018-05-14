@@ -12,7 +12,6 @@ using GooglePlayGames;
 public class GameCtrl : MonoBehaviour 
 {
 	public GameObject [] playerPrefab; 
-	//public Sprite[] startBtnImage = new Sprite[2];
 	public GameObject playerObject;
 	public GameObject currentTile;
 	public GameObject playerExplosion;
@@ -24,8 +23,8 @@ public class GameCtrl : MonoBehaviour
 	Vector2 tilePosition;
 	public GameLevel gameLevel;
 	public int numOfEntryTriggered;
-	public int score, bestScore, /*remainingPlays, refill,*/ gameRated;
-	public Text /*livesText,*/ mainMenuBestScoreText, InGameScoreText, PDScoreText;
+	public int score, bestScore, gameRated;
+	public Text mainMenuBestScoreText, InGameScoreText, PDScoreText;
 	public Button startButton, soundButton;
 	public List <Button> ShopButtons = new List <Button> (); //Buttons for shopitems
 	public List <GameObject> ObstacleBarPool = new List <GameObject> (); //List of pre created obstacle Bars
@@ -39,12 +38,10 @@ public class GameCtrl : MonoBehaviour
 	{
 		//PlayerPrefs.DeleteAll ();
 		prefabIndex = PlayerPrefs.GetInt ("prefabIndex", 0);
-		//SpawnPlayerPrefab ();
 		SetGameLevel ();
 		gameRated = PlayerPrefs.GetInt ("gameRated", 0);
 		gameMuted = PlayerPrefs.GetInt ("gameMuted", 0);
 		bestScore = PlayerPrefs.GetInt ("bestScore");
-		//refill = 6;
 		CreateObjects (true);
 
 		#if UNITY_ANDROID
@@ -67,15 +64,9 @@ public class GameCtrl : MonoBehaviour
 	{
 		//Set various variable values *****************************************************
 		score = 0;
-		//remainingPlays = PlayerPrefs.GetInt ("plays", refill);
-		//SetStartButtonImage ();
 		SetSoundButton ();
-		//SetLivesText ();
 		UpdateScoresText ();
 		//*********************************************************************************
-
-		//SpawnBars ();
-
 
 		//if Device is Android Sign in to GooglePlay Services
 		#if UNITY_ANDROID
@@ -145,20 +136,15 @@ public class GameCtrl : MonoBehaviour
 	}
 
 
-	//To set the Text value of the Remaining Lives/Plays left
-	/*public void SetLivesText ()
-	{
-		livesText.text = "REMAINING PLAYS " + remainingPlays.ToString ();
-	}*/
-
-
 	//Function to set the Text value of score boards
 	public void UpdateScoresText ()
 	{
 		//Set the text value for mainMenuBestScoreText
 		mainMenuBestScoreText.text = "BEST SCORE " + bestScore.ToString ();
+		
 		//Set the Text value for InGameScoreText
 		InGameScoreText.text = score.ToString ();
+		
 		//Set the Text Value for PDScoreText
 		if (newHighScore == true) {
 			PDScoreText.text = score.ToString () + "\nNEW BEST SCORE";
@@ -167,15 +153,6 @@ public class GameCtrl : MonoBehaviour
 			PDScoreText.text = "SCORE " + score.ToString () + "\nBEST " + bestScore.ToString ();
 		}
 	}
-
-	/*public void SetStartButtonImage () 
-	{
-		if (remainingPlays < 1) {
-			startButton.GetComponent <Image> ().sprite = startBtnImage[0];
-		} else {
-			startButton.GetComponent <Image> ().sprite = startBtnImage[1];
-		}
-	}*/
 
 
 	public void SetSoundButton ()
