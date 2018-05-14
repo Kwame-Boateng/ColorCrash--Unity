@@ -44,11 +44,6 @@ public class ObstacleBarManager : MonoBehaviour
 	{
 		enableCheck++;
 
-		/*if (playerController == null) {
-			player = GameObject.FindWithTag ("Player");
-			playerController = player.GetComponent <PlayerController> ();
-		}*/
-
 		if (enableCheck > 1) {
 
 			if (playerController == null) {
@@ -204,7 +199,6 @@ public class ObstacleBarManager : MonoBehaviour
 
 	void ObstacleDesign ()
 	{
-		//gameCtrl = gameController.GetComponent <GameCtrl> ();
 		switch (gameCtrl.gameLevel)
 		{
 		case GameLevel.Beginning:
