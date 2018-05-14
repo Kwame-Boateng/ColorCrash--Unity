@@ -18,9 +18,6 @@ public class GUIEventFunctions : MonoBehaviour
 	public int gamesPlayed; //Checks number of times user has played game
 	public int removeAds; //Checks if ads is purchased.
 	public Animator userInfaceAnimator; //Animator component on userInterface Gameobject
-	//GameObject thePlayer;
-	//PlayerController playerController;
-	//float initialGameSpeed = 6.0f;
 	public Text gameOverText, ShopItemMessage;
 	public AudioSource gameMusic;
 
@@ -31,17 +28,6 @@ public class GUIEventFunctions : MonoBehaviour
 
 	void Awake () 
 	{
-		//Initialize Facebook SDK ***********************************************
-		/*if (!FB.IsInitialized) {
-			FB.Init (InitCallback);
-		} else {
-			//If already initialized then signal an app activation App Event
-			FB.ActivateApp ();
-		}*/
-		//***********************************************************************
-
-
-
 		//Set Reference to the gameCtrl class ***********************************
 		gameController = GameObject.FindWithTag ("GameController");
 		gameCtrl = gameController.GetComponent <GameCtrl> ();
@@ -57,8 +43,6 @@ public class GUIEventFunctions : MonoBehaviour
 
 	void Start ()
 	{
-		//thePlayer = GameObject.FindWithTag ("Player");
-		//playerController = thePlayer.GetComponent <PlayerController> ();
 		ShopItemMessage.text = gameCtrl.GetSelectedShopItemName();
 		SetGameOverText ();
 		SetSound ();
@@ -68,49 +52,6 @@ public class GUIEventFunctions : MonoBehaviour
 			userInfaceAnimator.SetInteger ("Transition", mainToGameInstruction);
 		}
 	}
-
-	/*//Function to callback after Init function
-	void InitCallback ()
-	{
-		if (FB.IsInitialized) {
-			//Signal an app activation App Event
-			FB.ActivateApp ();
-		} else {
-			Debug.Log ("Failed to initialized the Facebook SDK");
-		}
-	}*/
-
-
-	//Function to share game on Facebook
-	/*public void FacebookShare ()
-	{
-		FB.ShareLink
-		(new System.Uri ("https://itunes.apple.com/us/app/color-tile-challenge/id1185115591?mt=8"), 
-			"Think You Can Hit 90 In This Game? Download For Free To Try #COLORTILECHALLENGE", 
-			"Think you can you score 90 in the New Color Tile Challenge game?" +
-			"\n Download to try it. #ColorTileChallenge #CHALLENGECTC90", null,
-			ShareCallback
-		);
-	}
-
-
-	//Called after the ShareLink function in FacebookShare. 
-	void ShareCallback (IShareResult result)
-	{
-		if (result.Cancelled || !string.IsNullOrEmpty (result.Error)) {
-			Debug.Log ("ShareLink Error: " + result.Error);
-		} else if (!string.IsNullOrEmpty (result.PostId)) {
-			//Print post identifier of the shared content
-			Debug.Log (result.PostId);
-		} else {
-			//What to do if share was succeeded
-			Debug.Log ("ShareLink successful");
-			if (isShared == 0) {
-				isShared = 1; PlayerPrefs.SetInt ("isShared", isShared);
-				gameOverText.text = "You unlocked Mr Rocket. Thanks for sharing our game";
-			}
-		}
-	}*/
 
 	private const string FACEBOOK_APP_ID = "1790257867928392";
 	private const string FACEBOOK_URL = "http://www.facebook.com/dialog/feed";
@@ -176,11 +117,6 @@ public class GUIEventFunctions : MonoBehaviour
 		}
 	}
 
-	/*public void GoToFacebookPage ()
-	{
-		Application.OpenURL ("fb://profile/969992883105774");
-	}*/
-
 
 	//Function to show Leadeboard 
 	public void ShowLeaderboard ()
@@ -207,34 +143,9 @@ public class GUIEventFunctions : MonoBehaviour
 		#endif ////////////////////////////////////////////////////////////////////////////////////////
 	}
 
-
-	//Function for Advertisement.Show callback
-	/*void HandleAdResult (ShowResult result)
-	{
-		#if UNITY_ADS //////////////////////////////////////////////////////////////////////////////
-		switch (result)
-		{
-		case ShowResult.Finished:
-		gameCtrl.remainingPlays = gameCtrl.refill;
-		//gameCtrl.SetStartButtonImage ();
-		gameCtrl.SetLivesText ();
-		PlayerPrefs.SetInt ("plays", gameCtrl.remainingPlays);
-		break;
-		case ShowResult.Skipped:
-		break;
-		case ShowResult.Failed:
-		Debug.Log ("The ad failed to show");
-		break;
-		}
-		#endif //////////////////////////////////////////////////////////////////////////////////
-	}*/
-
-
 	IEnumerator StartGamePlay ()
 	{
 		yield return new WaitForSeconds (0.7f);
-		//playerController.gameSpeed = initialGameSpeed;
-		//playerController.initialSpeed = initialGameSpeed;
 		gameCtrl.SpawnPlayerPrefab ();
 		gameCtrl.SpawnBars ();
 	}
@@ -242,13 +153,8 @@ public class GUIEventFunctions : MonoBehaviour
 	//Functionality for Start button
 	public void StartGame ()
 	{
-		/*if (gameCtrl.remainingPlays < 1) {
-			ShowRewardedAd ();
-		} else {*/
 			userInfaceAnimator.SetInteger ("Transition", mainToGamePlay);
-			//gameMusic.Play ();
 			StartCoroutine ("StartGamePlay");
-		//}
 	}
 
 
@@ -284,32 +190,6 @@ public class GUIEventFunctions : MonoBehaviour
 		PlayerPrefs.SetInt ("gamesPlayed", gamesPlayed);
 		gameCtrl.RestartScene ();
 	}
-
-
-	/*public void PauseGame ()
-	{
-		if (Time.timeScale == 1) {
-			Time.timeScale = 0;
-			gameMusic.volume = 0.02f;
-		} 
-
-		if (pauseMenu.enabled == false) {
-			pauseMenu.enabled = true;
-		}
-	}*/
-
-
-	/*public void UnPauseGame ()
-	{
-		if (pauseMenu.enabled == true) {
-			pauseMenu.enabled = false;
-		}
-
-		if (Time.timeScale == 0) {
-			Time.timeScale = 1;
-			gameMusic.volume = 0.4f;
-		}
-	}*/
 
 
 	void SetGameOverText ()
