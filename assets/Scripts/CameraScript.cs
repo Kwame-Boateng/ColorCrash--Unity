@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
 	PlayerController playerController;
 	float verticalOffset = 2.0f; //Distance between player and camera on y axis
 	public DeviceAspect deviceAspect; //The type of IOS device depending on aspect ratio
-	MyPersonalLibrary myPersonalLibrary;
+	MyPersonalLibrary myPersonalLibrary; 
 	Camera mainCamera; //To access camera
 	public Color darkBlue, blueBlack, greenBlue, darkishGrey, Grey;
 
@@ -24,10 +24,7 @@ public class CameraScript : MonoBehaviour
 
 	void Start () 
 	{
-		//player = GameObject.FindWithTag ("Player");
-		//playerController = player.GetComponent <PlayerController> ();
 		mainCamera.backgroundColor = myPersonalLibrary.RandomPicker <Color> (darkBlue, blueBlack, greenBlue, darkishGrey, Grey);
-		//SetPlayerSize ();
 	}
 
 	#if UNITY_ANDROID
