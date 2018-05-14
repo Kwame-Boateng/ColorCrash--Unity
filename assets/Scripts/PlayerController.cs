@@ -53,11 +53,6 @@ public class PlayerController : MonoBehaviour {
 		moveLeftRight ();
 	}
 
-	/*void FixedUpdate ()
-	{
-		MovePlayer ();
-	}*/
-
 	//Set or change the sprites of the player game object at runtime
 	public void SetOrChangeSprite ()
 	{
