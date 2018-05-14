@@ -38,7 +38,6 @@ public class ObstacleProperties : MonoBehaviour
 		if (transform.parent != null) 
 		{
 			transform.parent.gameObject.SetActive (false);
-			//gameCtrl.Trash.Add (transform.parent.gameObject);
 		} 
 		else 
 		{
@@ -46,12 +45,6 @@ public class ObstacleProperties : MonoBehaviour
 			gameCtrl.LevelEntryPool.Add (gameObject);
 		}
 	}
-
-	/*void ReducePlays ()
-	{
-		gameCtrl.remainingPlays--;
-		PlayerPrefs.SetInt ("plays", gameCtrl.remainingPlays);
-	}*/
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
