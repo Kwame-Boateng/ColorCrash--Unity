@@ -35,7 +35,6 @@ public class ShopItemManager : MonoBehaviour {
 	}
 
 
-
 	//Whether item has been selected or not
 	public bool IsSelected () 
 	{
